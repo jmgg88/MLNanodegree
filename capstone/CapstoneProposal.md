@@ -4,12 +4,14 @@ Juan Manuel García
 September 6, 2017
 
 ## Proposal 
-_(approx. 2-3 pages)_
 
 ### Domain Background
 _(approx. 1-2 paragraphs)_
 
-In this section, provide brief details on the background information of the domain from which the project is proposed. Historical information relevant to the project should be included. It should be clear how or why a problem in the domain can or should be solved. Related academic research should be appropriately cited in this section, including why that research is relevant. Additionally, a discussion of your personal motivation for investigating a particular problem in the domain is encouraged but not required.
+The stock markets provide a perfect environment for using big data techniques. The number of possibilities are endless, since the amount of data and the possible correlations existing between different market indicators and stock values is enormous. A proper analysis of market data can lead to a better understanding of its behaviour, unvealing unexpected properties, relations between pairs of stocks, or even providing prediction capabilities to some extent. Though a high level of theoretical controversy exists around the idea that markets can be profitably traded, many trading systems exist that, when traded consistently, show significant profit (10%-20%). More importantly, these systems are adaptative in the sense that they do not require a healthy global economy (a global rising trend) to make profit, but rather act differently in the different situations so that a benefit is achieved. Consistent and intelligent trading requires facing the markets as a statistical environment in which no certainties exist (like a poker game), trying to Benefit/Risk ratio that is put at stake in each market operation. 
+
+The process of analyzing the markets and systematically applying a trading system that is able to detect good trading opportunities is tedious to be performed manually and, even when the system rules are clear, it is often hard to automate them since they are based on visual indicators that cannot be easily transform into a numerical detection algorithm. The aim of this project is to use Deep Learning techniques to obtain a prediction model for stock values based on their historical data. Using this prediction model able to automatically signal potential entry opportunities can be built, thus reducing the manual work to a simple review of the signaled opportunities. 
+
 
 ### Problem Statement
 _(approx. 1 paragraph)_
