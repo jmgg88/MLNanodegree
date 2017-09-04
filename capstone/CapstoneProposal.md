@@ -16,10 +16,38 @@ The process of analyzing the markets and systematically applying a trading syste
 ### Problem Statement
 _(approx. 1 paragraph)_
 
+The problem to solve can be stated as follows:
+
+Design an intelligent automatic system that alerts the user whenever a profitable trading opportunity appears in any NYSE or NASDAQ traded stock. The time frame to be looked at depends on the global behaviour of the market (global ascending trend or anything else). The user shall be able to select between these two options depending on his analysis of the global market status. 
+
+A profitable trading opportunity is defined as follows. Let's assume a prediction for the closing price of the stock exists for each of the next N days. If a position is to be taken today, let the rule of parallel colors (To be explained) define the price of the stop loss for that order. The current situation is considered a profitable trading opportunity if, for any of the next N days the following rules are fulfilled:
++The Benefit/Risk ratio is above 2.5
++The price never triggers the stop loss between day 1 and day N
+
+Thus, the core of the system relies on a tool to predict the future expected closing price of a generic stock value for the following N days (with N in the order of a few days). 
+
+The prediction tool will apply Deep Learning, particularly Recurrent Neural Networks (and more precisely LSTMs). The prediction accuracy will be measured by comparing the actual prices of some testing set to the predicted prices (so really in terms of predicted values and not in terms of trading benefits). 
+
+
 In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
 
 ### Datasets and Inputs
 _(approx. 2-3 paragraphs)_
+
+The data to be used for the project will be retrieved from Yahoo Finance through the python API shown in the reference (TBD). The data consists of the following elements:
+
++Minimum/Maximum/Opening/Closing weekly price of the stock
++Minimum/Maximum/Opening/Closing daily price of the stock
++Minimum/Maximum/Opening/Closing weekly SP500 value
++Minimum/Maximum/Opening/Closing daily SP500 value
++Volume of the stock
++Force Index of the stock and potentially other indirectly computed indicators
+
+The set of stock values will be chosen arbitrarily from the set of stocks traded in NYSE or NASDAQ fulfilling the following conditions:
++Their mean price is above 8$
++Their mean trading volume is above 500000
++JMG to add the other conditions
+
 
 In this section, the dataset(s) and/or input(s) being considered for the project should be thoroughly described, such as how they relate to the problem and why they should be used. Information such as how the dataset or input is (was) obtained, and the characteristics of the dataset or input, should be included with relevant references and citations as necessary It should be clear how the dataset(s) or input(s) will be used in the project and whether their use is appropriate given the context of the problem.
 
