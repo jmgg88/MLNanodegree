@@ -34,22 +34,24 @@ In this section, clearly describe the problem that is to be solved. The problem 
 ### Datasets and Inputs
 _(approx. 2-3 paragraphs)_
 
-The data to be used for the project will be retrieved from Yahoo Finance through the python API shown in the reference (TBD). The data consists of the following elements:
+A set of 30 stocks will be selected based on the following criteria:
++ Average variation of closing price between one day and the next between 1.5% and 5%: we want to discard values which vary very little, thus presenting no trading opportunity, and very noisy values.
++ Average volume of traded contracts above 500000: we want to trade liquid stocks
++ Price range between 10$ and 150$: these values are better adapted to normal account sizes (in the order of thousand of dollars). 
 
+For each selected stock, the following data is considered relevant to the model:
 +Minimum/Maximum/Opening/Closing weekly price of the stock
 +Minimum/Maximum/Opening/Closing daily price of the stock
++Volume of the stock
++Force Index of the stock (a derived indicator which is simply computed as [close(n)-close(n-1)]/volume(n). Other indirectly computed indicators could also be added during the implementation process if required. 
+
+In addition, the following data is considered relevant for all the stocks:
 +Minimum/Maximum/Opening/Closing weekly SP500 value
 +Minimum/Maximum/Opening/Closing daily SP500 value
-+Volume of the stock
-+Force Index of the stock and potentially other indirectly computed indicators
 
-The set of stock values will be chosen arbitrarily from the set of stocks traded in NYSE or NASDAQ fulfilling the following conditions:
-+Their mean price is above 8$
-+Their mean trading volume is above 500000
-+JMG to add the other conditions
+The time range to be analyzed will cover the span between 01/01/2000 and 31/12/2016. This is important because different market regimes exist during this period, and the resulting model should be able to adapt to these changes. The period from year 2000 to year 2012 (included) will be used as training set, and the period from 2013 to 2016 will be used as testing set. From the set of selected stocks, 20 will be used in the training process as described above. The other 10 will be reserved for extra testing without having shown any part of their history to the system. This is necessary to test the ability of the system to generalize to any provided stock.
 
-
-In this section, the dataset(s) and/or input(s) being considered for the project should be thoroughly described, such as how they relate to the problem and why they should be used. Information such as how the dataset or input is (was) obtained, and the characteristics of the dataset or input, should be included with relevant references and citations as necessary It should be clear how the dataset(s) or input(s) will be used in the project and whether their use is appropriate given the context of the problem.
+The data to be used for the project will be retrieved from Yahoo Finance through the python API shown in the reference (TBD). 
 
 ### Solution Statement
 _(approx. 1 paragraph)_
@@ -59,7 +61,15 @@ In this section, clearly describe a solution to the problem. The solution should
 ### Benchmark Model
 _(approximately 1-2 paragraphs)_
 
-In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+The objective of the system is to outperform the market in a real world trading scenario. To measure this, the outcome of the system will be compared against three different benchmark models for different running periods of time (of a year duration):
+
++ Buy (or sell) and hold for the SP500 
++ Buy (or sell) and hold for the stock at stake
++ Optimal swing trading (the model will never outperform this, but the proximity to it measures its performance better than the previous too).
+
+The first two benchmark models simply give an indication about whether the system is any good or not. Performing worse than them simply implies a naive trading strategy is better than our sophisticated system. Performing better indicates simply the opposite, which doesn't say much about the profitability of our approach. 
+
+The third benchmark however is an approximation to the "perfect trading strategy", one that would maximize the outcome of the market. Thus, comparing against this tells us how close the model is to the maximum possible profitability.
 
 ### Evaluation Metrics
 _(approx. 1-2 paragraphs)_
