@@ -3,7 +3,7 @@
 Juan Manuel García
 September 6, 2017
 
-## Proposal // Trading expert system
+## Proposal - Trading expert system
 
 ### Domain Background
 
@@ -16,9 +16,9 @@ The process of analyzing the markets and systematically applying a trading syste
 
 Design an intelligent automatic system that alerts the user whenever a profitable trading opportunity appears in any NYSE or NASDAQ traded stock. The time frame to be used for trading is the daily one.
 
-A profitable trading opportunity is defined as follows. Let's assume a prediction for the closing price of the stock exists for each of the next N days. If a position is to be taken today, let there be a systematic rule to compute the stop loss level (protection level beyond which, if the price moves in that direction, the operation is considered failed and the position is closed with control amount of loss). The current situation is considered a profitable trading opportunity if, for any of the next N days the following rules are fulfilled:
-+The Benefit/Risk = (predicted price - current price)/(current price - stop loss) ratio is above 2.5
-+The price never triggers the stop loss between day 1 and day N (i.e., price > stop loss always)
+A profitable trading opportunity is defined as follows. Let's assume a prediction for the closing price of the stock exists for each of the next N days. If a position is to be taken today, let there be a systematic rule to compute the stop loss level (protection level beyond which, if the price moves in that direction, the operation is considered failed and the position is closed with controlled amount of loss). The current situation is considered a profitable trading opportunity if, for any of the next N days the following rules are fulfilled:
+ - The Benefit/Risk = (predicted price - current price)/(current price - stop loss) ratio is above 2.5
+ - The price never triggers the stop loss between day 1 and day N (i.e., price > stop loss always)
 
 Thus, the core of the system relies on a tool to predict the future expected closing price of a generic stock value for the following N days (with N in the order of 5 to 10 days). The rule to define the stop loss will be developed as part of the process, but shall be a simple rule based on historical parameters. 
 
@@ -31,14 +31,15 @@ A set of 30 stocks will be selected based on the following criteria:
 + Price range between 10$ and 150$: these values are better adapted to normal account sizes (in the order of thousand of dollars). 
 
 For each selected stock, the following data is considered relevant to the model:
-+Minimum/Maximum/Opening/Closing weekly price of the stock
-+Minimum/Maximum/Opening/Closing daily price of the stock
-+Volume of the stock
-+Force Index of the stock (a derived indicator which is simply computed as [close(n)-close(n-1)]/volume(n). Other indirectly computed indicators could also be added during the implementation process if required. 
++ Minimum/Maximum/Opening/Closing weekly price of the stock
++ Minimum/Maximum/Opening/Closing daily price of the stock
++ Volume of the stock
++ Force Index of the stock (a derived indicator which is simply computed as [close(n)-close(n-1)]/volume(n) ). 
++ Other indirectly computed indicators could also be added during the implementation process if required. 
 
 In addition, the following data is considered relevant for all the stocks:
-+Minimum/Maximum/Opening/Closing weekly SP500 value
-+Minimum/Maximum/Opening/Closing daily SP500 value
++ Minimum/Maximum/Opening/Closing weekly SP500 value
++ Minimum/Maximum/Opening/Closing daily SP500 value
 
 The time range to be analyzed will cover the span between 01/01/2000 and 31/12/2016. This is important because different market regimes exist during this period, and the resulting model should be able to adapt to these changes. The period from year 2000 to year 2012 (included) will be used as training set, and the period from 2013 to 2016 will be used as testing set. From the set of selected stocks, 20 will be used in the training process as described above. The other 10 will be reserved for extra testing without having shown any part of their history to the system. This is necessary to test the ability of the system to generalize to any provided stock.
 
@@ -46,7 +47,7 @@ The data to be used for the project will be retrieved from Yahoo Finance through
 
 ### Solution Statement
 
-Since the nature of the market data is sequential, the proposed solution is to model the system using a Recurrent Neural Network, which is intrinsicly adapted to the structure of the problem. The network will be provided with depth since experimental evidence strongly suggests this helps obtaining a better model (see [1]). In addition, the proposed solution will use Long Short-Term Memory cells (LSTMs) since it is expected they will be able to learn better the market behaviours, which are highly influenced by long and short term depdendencies. It is expected that this will also allow the model to better adapt to the different market regimes (trendy or lateral). The architecture and tuning of the network will be iterated as part of the project. The implementation will be performed in python using tensorflow.
+Since the nature of the market data is sequential, the proposed solution is to model the system using a Recurrent Neural Network, which is intrinsicly adapted to the structure of the problem. The network will be provided with depth since experimental evidence strongly suggests this helps obtaining a better model (see [1]). In addition, the proposed solution will use Long Short-Term Memory cells (LSTMs) since it is expected they will be able to learn better the market behaviours, which are highly influenced by long and short term depdendencies. It is expected that this will also allow the model to better adapt to the different market regimes (trendy or lateral). The architecture and tuning of the network will be iterated as part of the project. The implementation will be performed in python using tensorflow ([4]).
 
 
 ### Benchmark Model
@@ -90,7 +91,7 @@ The project will be split in the following phases:
 #### 4. Develop trading simulation
 - Develop trading strategy and implement functions for each criterion
 - Encapsulate the RNN model into an expert system that provides trading signals according to the previous trading strategy
-- Visualize of the signaled opportunities and iterate until the number and quality of them is optimized
+- Visualize the signaled opportunities and iterate until the number and quality of them is optimized
 - Create expert systems for the different benchmark models
 - Develop functions to backtest a trading system
 
@@ -105,7 +106,8 @@ The project will be split in the following phases:
 
 ### References
 
-[1] Goodfellow I., Bengio Y., Courville A. - Deep Learning
-[2] Efficient Market Hypothesis - https://en.wikipedia.org/wiki/Efficient-market_hypothesis
-[3] Yahoo Finance Python API - https://pypi.python.org/pypi/yahoo-finance
+- [1] Goodfellow I., Bengio Y., Courville A. - Deep Learning
+- [2] Efficient Market Hypothesis - https://en.wikipedia.org/wiki/Efficient-market_hypothesis
+- [3] Yahoo Finance Python API - https://pypi.python.org/pypi/yahoo-finance
+- [4] Tensorflow - https://www.tensorflow.org/
 
